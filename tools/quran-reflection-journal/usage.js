@@ -13,6 +13,7 @@
     copy: 'journal_copy_success',
     print: 'journal_print_open',
     blank: 'journal_blank_print_open',
+    download: 'journal_pdf_download',
     store: 'journal_app_store_click',
   });
 
@@ -166,6 +167,9 @@
   }
   window.addEventListener('quranjournal:print-open', () => recordPrint('print'));
   window.addEventListener('quranjournal:blank-print-open', () => recordPrint('blank'));
+  document.querySelector('#download-blank-pdf')?.addEventListener('click', (event) => {
+    if (event.isTrusted) record('download');
+  });
   for (const link of document.querySelectorAll('.store-link, .app-button')) {
     link.addEventListener('click', (event) => {
       if (event.isTrusted) record('store');

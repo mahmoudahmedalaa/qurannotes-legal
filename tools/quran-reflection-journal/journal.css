@@ -196,6 +196,14 @@ button:disabled { cursor: default; opacity: .6; }
 .prompt-card li { padding-inline-start: .22rem; }
 .prompt-card li + li { margin-top: .68rem; }
 .prompt-card li::marker { color: var(--muted); }
+.blank-template-actions { display: flex; align-items: center; flex-wrap: wrap; gap: .45rem .75rem; }
+.blank-template-actions a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: .9rem;
+  font-weight: 600;
+}
 
 .below-editor { margin-block: clamp(2rem, 5vw, 3.25rem); }
 .app-card {
@@ -236,7 +244,6 @@ footer a { display: inline-flex; align-items: center; min-height: 44px; }
     font-weight: 650;
   }
   .reflection-heading a { margin-inline-start: 0; }
-  .prompt-card a { margin-inline-start: .7rem; }
   .app-card { display: grid; grid-template-columns: auto minmax(0, 1fr); }
   .app-button { grid-column: 2; width: fit-content; max-width: 100%; margin-inline-start: 0; }
 }
