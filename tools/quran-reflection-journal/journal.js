@@ -16,6 +16,7 @@ const printLines = document.querySelector('#print-lines');
 
 let copyRevision = 0;
 let printMode;
+let measuredPrint = false;
 
 const dateFormat = new Intl.DateTimeFormat(document.documentElement.lang, {
   dateStyle: 'long',
@@ -73,9 +74,13 @@ document.querySelector('#copy-entry').addEventListener('click', async () => {
   ].filter(Boolean).join('\n');
   const text = `${heading}\n\n${entry.reflection}`;
 
+  window.dispatchEvent(new Event('quranjournal:copy-start'));
   try {
     await navigator.clipboard.writeText(text);
-    if (revision === copyRevision) status.textContent = 'Reflection copied.';
+    if (revision === copyRevision) {
+      status.textContent = 'Reflection copied.';
+      window.dispatchEvent(new Event('quranjournal:copy-success'));
+    }
   } catch {
     if (revision !== copyRevision) return;
     copyText.value = text;
@@ -100,10 +105,15 @@ function preparePrint(entry) {
 
 window.addEventListener('beforeprint', () => {
   preparePrint(printMode === 'blank' ? null : readEntry());
+  if (printMode && !measuredPrint) {
+    measuredPrint = true;
+    window.dispatchEvent(new Event(printMode === 'blank' ? 'quranjournal:blank-print-open' : 'quranjournal:print-open'));
+  }
 });
 
 window.addEventListener('afterprint', () => {
   printMode = undefined;
+  measuredPrint = false;
   preparePrint(null);
 });
 
@@ -113,12 +123,14 @@ document.querySelector('#print-entry').addEventListener('click', () => {
   if (!entry) return;
   printMode = 'entry';
   preparePrint(entry);
+  window.dispatchEvent(new Event('quranjournal:print-request'));
   window.print();
 });
 
 printBlank.addEventListener('click', () => {
   printMode = 'blank';
   preparePrint(null);
+  window.dispatchEvent(new Event('quranjournal:print-request'));
   window.print();
 });
 
