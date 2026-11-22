@@ -16,6 +16,7 @@
   <link rel="icon" type="image/png" href="qurannotes-icon.png">
   <link rel="stylesheet" href="journal.css">
   <script src="journal.js" defer></script>
+  <script src="usage.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#reflection">Skip to journal</a>
@@ -32,6 +33,13 @@
     <section class="intro wrap" aria-labelledby="page-title">
       <h1 id="page-title">Quran reflection journal</h1>
       <p>Pause after an ayah and write down what stayed with you. Keep your reflection or print a blank template for later.</p>
+      <div id="usage-consent" class="usage-consent" hidden>
+        <label for="share-usage">
+          <input type="checkbox" id="share-usage" autocomplete="off" aria-describedby="usage-help">
+          Share anonymous usage counts
+        </label>
+        <p id="usage-help">Optional for this visit. Share actions such as copying or printing. Your writing, ayah reference, and date stay on this page. You can turn sharing off here.</p>
+      </div>
     </section>
     <div class="wrap workspace">
       <section class="editor" aria-labelledby="entry-title">
